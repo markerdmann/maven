@@ -92,13 +92,15 @@ get '/' do
 end
 
 #create csv file
+#create csv file
 get '/social/:key' do
   i = 0
   key_item = params[:key]
-  url = "https://graph.facebook.com/me/home?access_token=#{key_item}"
+  access_token = key_item
+  url = "https://graph.facebook.com/me/home"
   header = ["name", "message"]
-  while (i += 1) < 50
-    newsfeed = `curl '#{url}'`
+  while url
+    newsfeed = access_token.get(url)
     response = JSON.parse(newsfeed)
     data = response["data"]
     rows = []
@@ -108,17 +110,13 @@ get '/social/:key' do
       next if message == "No data available" || message == "" || message == nil
       rows << [name, message]
     end
-    FasterCSV.open("#{key_item}.csv", 'a') do |csv|
-      csv << header
-      rows.each do |row|
-        csv << row
-      end
+    rows.each do |row|
+        REDIS.lpush(key_item, row)      
     end
-    #`curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
-    url = response["paging"]["next"]
+    url = newsfeed["paging"] ? newsfeed["paging"]["next"] : nil
   end
-  erb :show_message
 end
+
 
 #add items to crowdflower
 get '/social/cf_push/:job_id/:api_key' do
