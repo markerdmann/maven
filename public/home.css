@@ -52,9 +52,14 @@ body{
 	margin-top: 30px;
 }
 
+.onecol{
+	width: 900px;
+}
+
 .special{
 	color: green;
 }
+
 
 .search{
 	background: url("/images/search_box.png") no-repeat scroll 0 0 transparent;
@@ -90,3 +95,10 @@ body{
 a:hover{
 	background-position: 0 -31px;
 }
+
+h2{
+	color: #E64D38;
+	font-style:strong;
+}
+
+

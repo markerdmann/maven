@@ -45,9 +45,8 @@
     </div>
 
 		<ul class="tabs">
-		  <li><a href="#tab1">Overview</a></li>
-	    <li><a href="#tab2">My Friends</a></li>
-	 		<li><a href="#tab3">Your mom</a></li>
+		  <li><a href="#tab1">Your Stats</a></li>
+	    <li><a href="#tab2">Friends Stats</a></li>
 		</ul>
     <div class = "page">
 			<div class="tab_container">
@@ -55,18 +54,12 @@
           <div class = "leftcol">
             <script type="text/javascript" src="/javascript/bar_graph.js"></script>
           </div>    
-    			<div class = "rightcol"><%= erb(:table, :layout => false) %></div>
+    			<div class = "rightcol"><%= erb(:quotes, :layout => false) %></div>
 				</div>
     		<div id="tab2" class="tab_content">
-        	<div class = "leftcol">
-          	<div>Based on the opinions of 200,000 people, your friends are: </div>
-						<script type="text/javascript" src="/javascript/graph.js"></script>
-					</div>
-    		</div>
-				<div id="tab3" class="tab_content">
-        	<div class = "leftcol">
-          	<div>Based on the opinions of 200,000 people, your friends are: </div>
-						<script type="text/javascript" src="/javascript/graph.js"></script>
+        	<div class = "leftcol onecol">
+						<h2>Friend by percentage of boring status posts</h2>
+						<script type="text/javascript" src="/javascript/friend_graph.js"></script>
 					</div>
     		</div>
 			</div>

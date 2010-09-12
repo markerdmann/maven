@@ -18,7 +18,7 @@ configure do
 end
 
 get '/index' do
-  erb :index
+  erb :home
 end
 
 get '/login' do
@@ -80,7 +80,7 @@ def redirect_uri
 end
 
 get '/' do
-  erb :home
+  erb :index
 end
 
 #create csv file

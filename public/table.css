@@ -51,3 +51,14 @@ table th {
 	font-family: "arial";
 	font-size: 19px;
 }
+.oneCol{
+	width: 270px;
+}
+.quotes{
+	font-style:normal;
+	font-style:italic;
+} 
+
+.even{
+	color: #909090;
+}
