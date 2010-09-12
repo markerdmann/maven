@@ -27,7 +27,7 @@ while (i += 1) < 40
   #   end
   # end
 #  ret = `curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
-  url = response["paging"]["next"]
+  url = newsfeed["paging"]["next"]
 end
 
 p "Done scraping"
