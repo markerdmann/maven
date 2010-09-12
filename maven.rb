@@ -14,8 +14,9 @@ end
 
 def client
   OAuth2::Client.new('140998689277380', '25eb7d9c148183d465e3c1e48fafeade', 
-  :site => 'https://graph.facebook.com'
-  :parse_json => true)
+    :site => 'https://graph.facebook.com'
+    :parse_json => true
+  )
 end
 
 get '/auth/facebook' do
