@@ -62,7 +62,7 @@ end
 
 get '/scrape' do
   code = REDIS.get("users:#{session[:user]}:code")
-  access_token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
+  access_token = client.web_server.get_access_token(code, :redirect_uri => redirect_uri)
   ret = scrape(access_token)
 end
 
