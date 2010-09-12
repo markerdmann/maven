@@ -49,3 +49,5 @@ output = {
   :messages => messages
 }
 File.open('../data', 'w') {|f| f.write(Marshal.dump(output))}
+p output[:user_counts]
+#pp output[:messages]["by_category"]["happy"]

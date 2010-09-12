@@ -78,7 +78,6 @@ get '/data/:friend' do
   friend_data[:user_counts] = data[:user_counts][friend]
   friend_data[:user_totals] = data[:user_totals][friend]
   friend_data.to_json
-  erb :individual_friend_graph => {:friend_data => friend_data}
 end
 
 def redirect_uri
