@@ -58,6 +58,7 @@ get '/auth/facebook/callback' do
   user = access_token.get('/me')
 
   user.inspect
+  erb :home
 end
 
 get '/code' do
