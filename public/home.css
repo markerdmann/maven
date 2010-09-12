@@ -1,5 +1,4 @@
 *{
-	font-family: "arial";
 }
 
 #header{
@@ -15,8 +14,12 @@
 	width: 300px;
 	height: 100px;
 	margin-left: 100px;
+	float: left;
 }
 
+.graph_header{
+	font-family: "arial";
+}
 body{
 	background-color:  #E8F3FB;
 }
@@ -34,15 +37,56 @@ body{
 }
 
 .leftcol{
+	height: 500px;
 	float: left;
-	width: 500px;
+	width: 600px;
+	border-right-color: #D8D8D8;
+	border-right-style: solid;
+	border-right-width: 1px;
+	padding-right: 40px;
 }
 
 .rightcol{
-	float: left;
-	width: 500px;	
+	float: right;
+	width: 300px;	
+	margin-top: 30px;
 }
 
 .special{
 	color: green;
+}
+
+.search{
+	background: url("/images/search_box.png") no-repeat scroll 0 0 transparent;
+	float: right;
+	height: 31px;
+	margin: 24px 100px 0;
+	position: relative;
+	width: 240px;
+}
+
+.search input{
+	background: none repeat scroll 0 0 transparent;
+	border: 0 none;
+	font-size: 11px;
+	left: 25px;
+	padding: 0;
+	position: absolute;
+	top: 9px;
+	width: 150px;
+	z-index: 1;
+}
+
+.search_button{
+	background: url("/images/search_go.png") no-repeat scroll 0 0 transparent;
+	height: 31px;
+	outline: medium none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 45px;
+}
+
+a:hover{
+	background-position: 0 -31px;
 }
