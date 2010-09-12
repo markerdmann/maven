@@ -21,14 +21,14 @@ body{
 	background-color:  #E8F3FB;
 }
 
+
+
 .page{
 	background-color: white;
 	height: 500px;
 	width: 1000px;
 	margin: 0 auto;
-	border-style: solid;
-	border-color: #D8D8D8;
-	border-width: 2px;
+
 	margin-bottom: 50px;
 	padding: 20px 20px 20px 20px;
 }
@@ -46,3 +46,5 @@ body{
 .special{
 	color: green;
 }
+
+
