@@ -6,10 +6,29 @@ require 'sinatra'
 require 'oauth2'
 require 'json'
 
+enable :sessions
+
 configure do
   require 'redis'
   uri = URI.parse(ENV["REDISTOGO_URL"])
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+end
+
+get '/login' do
+  erb :login
+end
+
+post '/login' do
+  password = REDIS.get("users:#{params[:username]}")
+  if password == params[:password]
+    session[:user] = Digest::MD5.hexdigest(password)
+  elsif password == nil
+    REDIS.set("users:#{params[:username]}", params[:password])
+    session[:user] = Digest::MD5.hexdigest(params[:password])
+  else
+    redirect '/login'
+  end
+  redirect '/'
 end
 
 def client
