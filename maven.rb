@@ -28,7 +28,7 @@ end
 
 get '/auth/facebook/callback' do
   access_token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
-  user = JSON.parse(access_token.get('/me'))
+  user = access_token.get('/me')
 
   user.inspect
 end
