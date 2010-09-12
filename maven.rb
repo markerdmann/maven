@@ -59,6 +59,12 @@ get '/code' do
   REDIS.get("users:#{session[:user]}:code")
 end
 
+get '/scrape' do
+  code = REDIS.get("users:#{session[:user]}:code")
+  ret = scrape(code)
+end
+
+
 def redirect_uri
   uri = URI.parse(request.url)
   uri.path = '/auth/facebook/callback'
