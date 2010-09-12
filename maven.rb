@@ -46,10 +46,15 @@ get '/auth/facebook' do
 end
 
 get '/auth/facebook/callback' do
+  REDIS.set("users:#{session[:user]}:code", params[:code])
   access_token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
   user = access_token.get('/me')
 
   user.inspect
+end
+
+get '/code' do
+  REDIS.get("users:#{session[:user]}:code")
 end
 
 def redirect_uri
