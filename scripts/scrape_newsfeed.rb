@@ -5,8 +5,10 @@ require 'fastercsv'
 JOB_ID = 21236
 API_KEY = ""  #ARGV[0]
 
+def scrape(code)
+
 i = 0
-url = "https://graph.facebook.com/me/home?access_token=2227470867|2.fEeKGsGxEgK_R5iMSN4XcQ__.3600.1284285600-33502025|H72d_XUrY4KZCmcWAKdyj6DvEC0"
+url = "https://graph.facebook.com/me/home?access_token=#{code}"
 header = ["name", "message"]
 while (i += 1) < 40
   newsfeed = `curl '#{url}'`
@@ -25,6 +27,10 @@ while (i += 1) < 40
       csv << row
     end
   end
-  `curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
+  ret = `curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
   url = response["paging"]["next"]
+end
+
+ret
+
 end
