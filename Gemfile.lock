@@ -1,7 +1,17 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.2.1)
+    faraday (0.4.6)
+      addressable (>= 2.1.1)
+      rack (>= 1.0.1)
+    json (1.4.6)
+    multi_json (0.0.4)
+    oauth2 (0.0.13)
+      faraday (~> 0.4.1)
+      multi_json (>= 0.0.4)
     rack (1.2.1)
+    redis (2.0.5)
     sinatra (1.0)
       rack (>= 1.0)
 
@@ -9,4 +19,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  json
+  oauth2
+  redis
   sinatra
