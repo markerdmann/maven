@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'bundler'
+require 'erb'
+
 Bundler.setup
 
 require 'sinatra'
@@ -65,5 +67,9 @@ def redirect_uri
 end
 
 get '/' do
-  "hello bitches"
+  erb :home
 end
+
+#get '/friend/:userid' do
+ #   "#{params[:name]}"
+#end

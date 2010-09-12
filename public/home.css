@@ -1,0 +1,48 @@
+*{
+	font-family: "arial";
+}
+
+#header{
+	background-image: url("/images/header.jpg");
+	background-position: 0 -56px;
+	background-repeat: repeat-x;
+	height: 100px;
+	margin-bottom: 30px;
+}
+
+#logo{
+	background-image: url("/images/logo.png");
+	width: 300px;
+	height: 100px;
+	margin-left: 100px;
+}
+
+body{
+	background-color:  #E8F3FB;
+}
+
+.page{
+	background-color: white;
+	height: 500px;
+	width: 1000px;
+	margin: 0 auto;
+	border-style: solid;
+	border-color: #D8D8D8;
+	border-width: 2px;
+	margin-bottom: 50px;
+	padding: 20px 20px 20px 20px;
+}
+
+.leftcol{
+	float: left;
+	width: 500px;
+}
+
+.rightcol{
+	float: left;
+	width: 500px;	
+}
+
+.special{
+	color: green;
+}
