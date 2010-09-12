@@ -106,7 +106,7 @@ get '/social/:key' do
 end
 
 #add items to crowdflower
-get '/social/cf_push/:job_id/:api_key'
+get '/social/cf_push/:job_id/:api_key' do
   JOB_ID = params[:job_id]
   API_KEY = params[:api_key]
   `curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
