@@ -27,10 +27,11 @@ while (i += 1) < 40
       csv << row
     end
   end
-  ret = `curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
+#  ret = `curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
   url = response["paging"]["next"]
 end
 
-ret
+p "Done scraping"
+# ret
 
 end
