@@ -17,10 +17,6 @@ configure do
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 end
 
-get '/index' do
-  erb :index
-end
-
 get '/login' do
   erb :login
 end
@@ -58,7 +54,6 @@ get '/auth/facebook/callback' do
   user = access_token.get('/me')
 
   user.inspect
-  erb :home
 end
 
 get '/code' do
@@ -84,15 +79,13 @@ get '/' do
 end
 
 #create csv file
-#create csv file
 get '/social/:key' do
   i = 0
   key_item = params[:key]
-  access_token = key_item
-  url = "https://graph.facebook.com/me/home"
+  url = "https://graph.facebook.com/me/home?access_token=#{key_item}"
   header = ["name", "message"]
   while url
-    newsfeed = access_token.get(url)
+    newsfeed = `curl '#{url}'`
     response = JSON.parse(newsfeed)
     data = response["data"]
     rows = []
@@ -107,8 +100,8 @@ get '/social/:key' do
     end
     url = newsfeed["paging"] ? newsfeed["paging"]["next"] : nil
   end
+  erb :show_message
 end
-
 
 #add items to crowdflower
 get '/social/cf_push/:job_id/:api_key' do
