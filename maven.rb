@@ -7,6 +7,7 @@ Bundler.setup
 require 'sinatra'
 require 'oauth2'
 require 'json'
+require 'scripts/scrape_newsfeed'
 
 enable :sessions
 
