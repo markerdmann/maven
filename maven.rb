@@ -58,7 +58,6 @@ get '/auth/facebook/callback' do
   user = access_token.get('/me')
 
   user.inspect
-  erb :home
 end
 
 get '/code' do
@@ -71,6 +70,14 @@ get '/scrape' do
   ret = scrape(access_token)
 end
 
+get '/data/:friend' do
+  friend = params[:friend]
+  data = Marshal.load(File.open('data', 'r').read)
+  friend_data = {}
+  friend_data[:user_counts] = data[:user_counts][friend]
+  friend_data[:user_totals] = data[:user_totals][friend]
+  friend_data.to_json
+end
 
 def redirect_uri
   uri = URI.parse(request.url)
@@ -89,7 +96,7 @@ get '/social/:key' do
   key_item = params[:key]
   url = "https://graph.facebook.com/me/home?access_token=#{key_item}"
   header = ["name", "message"]
-  while (i += 1) < 50
+  while url
     newsfeed = `curl '#{url}'`
     response = JSON.parse(newsfeed)
     data = response["data"]
@@ -100,14 +107,10 @@ get '/social/:key' do
       next if message == "No data available" || message == "" || message == nil
       rows << [name, message]
     end
-    FasterCSV.open("#{key_item}.csv", 'a') do |csv|
-      csv << header
-      rows.each do |row|
-        csv << row
-      end
+    rows.each do |row|
+        REDIS.lpush(key_item, row)      
     end
-    #`curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
-    url = response["paging"]["next"]
+    url = newsfeed["paging"] ? newsfeed["paging"]["next"] : nil
   end
   erb :show_message
 end

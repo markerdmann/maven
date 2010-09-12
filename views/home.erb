@@ -19,7 +19,6 @@
 
 				//On Click Event
 				$("ul.tabs li").click(function() {
-
 					$("ul.tabs li").removeClass("active"); //Remove any "active" class
 					$(this).addClass("active"); //Add "active" class to selected tab
 					$(".tab_content").hide(); //Hide all tab content
@@ -33,8 +32,11 @@
   </HEAD>
 
   <BODY>
-  	<div id = "header">
-    	<div id = "logo"></div>
+
+                <div id = "header">
+                        <div id = "logo"></div>
+                </div>
+
 			<div class = "search">
 				<form id = "search" method = "get">
 					<input id = "search" type ="text" title = "Search for a friend" />
@@ -42,7 +44,7 @@
 					</form>
 				</div>
 			</div>
-    </div>
+
 
 		<ul class="tabs">
 		  <li><a href="#tab1">Your Stats</a></li>
@@ -64,6 +66,8 @@
     		</div>
 			</div>
 		</div>
-  </BODY>
+
+        </BODY>
+
 </HTML>
 
