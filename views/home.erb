@@ -28,19 +28,22 @@
 					return false;
 				});
 			});
+			function submit(){
+				$.get("http://crowdmaven.heroku.com/data/");
+			}
 		</script>
   </HEAD>
 
   <BODY>
 
-                <div id = "header">
-                        <div id = "logo"></div>
-                </div>
+     <div id = "header">
+     		<div id = "logo"></div>
+     </div>
 
 			<div class = "search">
 				<form id = "search" method = "get">
 					<input id = "search" type ="text" title = "Search for a friend" />
-						<a class = "search_button" onclick = "#" href-"#"></a>
+						<a class = "search_button" onclick = "submit();" href="#"></a>
 					</form>
 				</div>
 			</div>
