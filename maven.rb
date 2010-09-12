@@ -62,7 +62,7 @@ end
 
 get '/scrape' do
   code = REDIS.get("users:#{session[:user]}:code")
-  ret = scrape(code)
+  scrape(code)
 end
 
 
