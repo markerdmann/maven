@@ -5,5 +5,5 @@ Bundler.setup
 require 'sinatra'
 
 get '/' do
-  "hello"
+  "hello bitches"
 end
