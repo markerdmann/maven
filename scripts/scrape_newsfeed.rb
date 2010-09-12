@@ -10,7 +10,7 @@ def scrape(access_token)
 i = 0
 url = "https://graph.facebook.com/me/home"
 header = ["name", "message"]
-while (i += 1) < 40
+while url
   newsfeed = access_token.get(url)
   data = newsfeed["data"]
   rows = []
@@ -27,7 +27,7 @@ while (i += 1) < 40
   #   end
   # end
 #  ret = `curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
-  url = newsfeed["paging"]["next"]
+  url = newsfeed["paging"] ? newsfeed["paging"]["next"] : nil
 end
 
 p "Done scraping"
