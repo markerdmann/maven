@@ -1,0 +1,38 @@
+.page{
+	height: 250px;
+	margin-top: 4px;
+}
+
+.header{
+	font-weight:normal;
+	margin:0.75em 0 0.2em;
+	text-align:center;
+	font-family: "Myriad Pro","Gill Sans","Gill Sans MT",Calibri,sans-serif;
+	color: #333333;
+}
+
+.large{
+	font-size:50px;
+}
+
+.medium{
+	font-size: 15px;
+}
+
+.hug{
+	color: red;
+}
+
+.facebook_connect{
+	background-image: url("images/facebook_signup.png");
+	height: 44px;
+	opacity: 0.9;
+	width: 300px;
+	margin: 20px auto;
+}
+
+.facebook_connect:hover{
+	opacity: 1;
+}
+
+

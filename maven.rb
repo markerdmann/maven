@@ -17,6 +17,10 @@ configure do
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 end
 
+get '/index' do
+  erb :index
+end
+
 get '/login' do
   erb :login
 end
@@ -54,6 +58,7 @@ get '/auth/facebook/callback' do
   user = access_token.get('/me')
 
   user.inspect
+  erb :home
 end
 
 get '/code' do
