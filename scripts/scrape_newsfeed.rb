@@ -5,7 +5,7 @@ require 'fastercsv'
 JOB_ID = 21236
 API_KEY = ""  #ARGV[0]
 
-def scrape(code)
+def scrape(access_token)
 
 i = 0
 url = "https://graph.facebook.com/me/home"
