@@ -7,6 +7,7 @@ Bundler.setup
 require 'sinatra'
 require 'oauth2'
 require 'json'
+require 'scripts/scrape_newsfeed'
 
 enable :sessions
 
@@ -14,6 +15,10 @@ configure do
   require 'redis'
   uri = URI.parse(ENV["REDISTOGO_URL"])
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+end
+
+get '/index' do
+  erb :index
 end
 
 get '/login' do
@@ -53,10 +58,26 @@ get '/auth/facebook/callback' do
   user = access_token.get('/me')
 
   user.inspect
+  erb :home
 end
 
 get '/code' do
   REDIS.get("users:#{session[:user]}:code")
+end
+
+get '/scrape' do
+  code = REDIS.get("users:#{session[:user]}:code")
+  access_token = client.web_server.get_access_token(code, :redirect_uri => redirect_uri)
+  ret = scrape(access_token)
+end
+
+get '/data/:friend' do
+  friend = params[:friend]
+  data = Marshal.load(File.open('data', 'r').read)
+  friend_data = {}
+  friend_data[:user_counts] = data[:user_counts][friend]
+  friend_data[:user_totals] = data[:user_totals][friend]
+  friend_data.to_json
 end
 
 def redirect_uri
@@ -68,6 +89,40 @@ end
 
 get '/' do
   erb :home
+end
+
+#create csv file
+#create csv file
+get '/social/:key' do
+  i = 0
+  key_item = params[:key]
+  access_token = key_item
+  url = "https://graph.facebook.com/me/home"
+  header = ["name", "message"]
+  while url
+    newsfeed = access_token.get(url)
+    response = JSON.parse(newsfeed)
+    data = response["data"]
+    rows = []
+    data.each do |post|
+      p name = post["from"]["name"]
+      p message = post["message"]
+      next if message == "No data available" || message == "" || message == nil
+      rows << [name, message]
+    end
+    rows.each do |row|
+        REDIS.lpush(key_item, row)      
+    end
+    url = newsfeed["paging"] ? newsfeed["paging"]["next"] : nil
+  end
+end
+
+
+#add items to crowdflower
+get '/social/cf_push/:job_id/:api_key' do
+  JOB_ID = params[:job_id]
+  API_KEY = params[:api_key]
+  `curl -T 'data.csv' -H 'Content-Type: text/csv' https://api.crowdflower.com/v1/jobs/#{JOB_ID}/upload.json?key=#{API_KEY}`
 end
 
 #get '/friend/:userid' do
