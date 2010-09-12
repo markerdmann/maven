@@ -66,6 +66,14 @@ get '/scrape' do
   ret = scrape(access_token)
 end
 
+get '/data/:friend' do
+  friend = params[:friend]
+  data = Marshal.load(File.open('data', 'r').read)
+  friend_data = {}
+  friend_data[:user_counts] = data[:user_counts][friend]
+  friend_data[:user_totals] = data[:user_totals][friend]
+  friend_data.to_json
+end
 
 def redirect_uri
   uri = URI.parse(request.url)
